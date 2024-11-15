@@ -19,7 +19,7 @@ document.getElementById('resetButton').addEventListener('click', function() {
         .then(response => response.json())
         .then(data => {
             updateResult(data);
-            document.getElementById('srPlusCostResult').innerHTML = ''; // 清空SR+计算结果
+            document.getElementById('srPlusCostResult').innerHTML = ''; 
         });
 });
 

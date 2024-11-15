@@ -1,4 +1,4 @@
-/* 设置整个页面的样式 */
+/* ページ全体のスタイル */
 body {
     font-family: 'Arial', sans-serif;
     margin: 0;
@@ -11,7 +11,7 @@ body {
     overflow: hidden;
 }
 
-/* 容器样式 */
+/* コンテナスタイル */
 .container {
     width: 90%;
     max-width: 800px;
@@ -28,7 +28,7 @@ body {
     box-sizing: border-box;
 }
 
-/* 页眉样式 */
+/* ヘッダースタイル */
 header {
     position: sticky;
     top: 0;
@@ -43,110 +43,26 @@ h1 {
     font-size: 1.5em;
 }
 
-/* 总结果显示区域 */
+/* 結果表示エリア */
 #totalResult {
     display: flex;
-    justify-content: flex-start;  /* 左对齐 */
-    align-items: center;          /* 垂直居中 */
+    justify-content: flex-start;  /* 左寄せ */
+    align-items: center;          /* 垂直中央 */
     margin: 20px 0;
     font-size: 1.2em;
     color: #333;
-    flex-wrap: wrap;              /* 防止内容过多时换行 */
-    width: 100%;                  /* 确保区域宽度为 100% */
+    flex-wrap: wrap;              /* 内容が多すぎる場合の改行防止 */
+    width: 100%;                  /* エリア幅を100%に設定 */
 }
 
-/* 每个卡片统计部分样式 */
+/* 各カード統計のスタイル */
 .card-stat {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 0 20px;  /* 设置每个卡片结果的左右间距 */
+    margin: 0 20px;  /* カード結果間の左右マージン */
 }
 
 .card-stat span {
     font-weight: bold;
-    color: #4CAF50;
-}
-
-.card-stat .label {
-    font-size: 1.1em;
-    margin-top: 5px;
-    color: #333;
-}
-
-/* 卡片结果区域样式 */
-#cardResult {
-    display: flex;
-    justify-content: flex-start;  /* 左对齐 */
-    flex-wrap: nowrap;            /* 不换行 */
-    padding: 10px;
-    width: 100%;
-    overflow-x: auto;             /* 水平滚动 */
-}
-
-/* 图片样式 */
-#cardResult img {
-    width: 150px;                 /* 增大图片宽度 */
-    height: 150px;                /* 增大图片高度 */
-    margin: 5px;
-    object-fit: cover;
-}
-
-/* 按钮容器样式 */
-.button-container {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin: 10px 0;
-}
-
-/* 圆角按钮样式 */
-.round-btn {
-    border-radius: 8px;
-    border: none;
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 20px;
-    font-size: 14px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-/* 按钮悬停效果 */
-.round-btn:hover {
-    background-color: #45a049;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-/* 长按钮样式 */
-.long-btn {
-    border-radius: 8px;
-    border: none;
-    background-color: #4CAF50;
-    color: white;
-    width: 250px;
-    padding: 10px;
-    font-size: 14px;
-    margin-top: 10px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-/* 长按钮悬停效果 */
-.long-btn:hover {
-    background-color: #45a049;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-/* 卡片列表样式 */
-#cardList {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-/* 额外费用结果样式 */
-#srPlusCostResult {
-    margin-top: 15px;
-    font-size: 14px;
-}
+    color:

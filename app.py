@@ -4,7 +4,7 @@ import os
 
 app = Flask(__name__)
 
-# 卡片类型及对应的抽取概率
+# カードタイプと対応する抽選確率
 card_probabilities = {
     'N': 0.33,
     'N+': 0.25,
@@ -24,7 +24,7 @@ eleven_gacha_probabilities = {
 gacha_price = 100
 eleven_gacha_price = 1000
 
-# 图片文件夹路径，确保每种卡片类型都指向正确的文件夹
+# 画像フォルダのパス（カードタイプに対応するフォルダを設定）
 image_folders = {
     'N': 'static/images/N/',
     'N+': 'static/images/N+/',
@@ -50,7 +50,7 @@ class GachaSimulator:
     def draw_eleven(self):
         self.total_cost += eleven_gacha_price
         self.total_draws += 11
-        # 十连抽，每次抽 10 张卡片，最后一张固定为 SR
+        # 十連ガチャ、毎回10枚を引き、最後の1枚はSR確定
         cards = [(self._get_card(eleven_gacha_probabilities), self._get_image(self._get_card(eleven_gacha_probabilities))) for _ in range(10)]
         cards.append(('SR', self._get_image('SR')))
         for card, _ in cards:
@@ -62,15 +62,15 @@ class GachaSimulator:
     def _get_card(self, probabilities):
         rand = random.random()
         cumulative_prob = 0.0
-        # 根据概率抽取卡片
+        # 確率に基づいてカードを抽選
         for card, prob in probabilities.items():
             cumulative_prob += prob
             if rand <= cumulative_prob:
                 return card
-        return 'N'  # 默认返回 'N' 卡片
+        return 'N'  # デフォルトで'N'カードを返す
 
     def _get_image(self, card_type):
-        # 根据卡片类型获取对应的图片路径
+        # カードタイプに対応する画像のパスを取得
         folder = image_folders[card_type]
         image_files = os.listdir(folder)
         return os.path.join(folder, random.choice(image_files))
@@ -81,7 +81,7 @@ class GachaSimulator:
         self.card_counts = {'N': 0, 'N+': 0, 'R': 0, 'R+': 0, 'SR': 0, 'SR+': 0}
         self.cards = []
         self.total_sr_plus_draws = 0
-        self.sr_plus_cost_cache = None  # 用于缓存“全种类SR+卡片的花费”
+        self.sr_plus_cost_cache = None  # "全種類SR+カードのコスト"のキャッシュ
 
     def calculate_sr_plus_cost(self):
         if self.sr_plus_cost_cache is not None:
