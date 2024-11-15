@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ガチャシミュレータ</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>ガチャシミュレータ</h1>
+        </header>
+
+        <div id="cardResult">
+            <!-- 结果显示区域 -->
+        </div>
+
+        <div id="totalResult">
+            <!-- 累计信息区域 -->
+            <p>今までの結果: <span id="totalCount"></span> 回、使った金額: <span id="totalSpent"></span> 円</p>
+        </div>
+
+        <div id="cardCounts">
+            <!-- 每种卡片的数量 -->
+            <p>今までに引いたカード: </p>
+            <ul id="cardList">
+                <!-- 动态生成的卡片信息 -->
+            </ul>
+        </div>
+
+        <div class="button-container">
+            <button id="gachaButton" class="round-btn">ガチャを引く（100円）</button>
+            <button id="11gachaButton" class="round-btn">11連ガチャを引く（1000円）</button>
+            <button id="resetButton" class="round-btn">リセット</button>
+        </div>
+
+        <button id="srPlusCostButton" class="long-btn">全種類のSR+が出るまでいくらかかるか計算</button>
+
+        <div id="srPlusCostResult">
+            <!-- SR+ 费用计算结果 -->
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
