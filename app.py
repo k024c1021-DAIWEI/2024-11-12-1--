@@ -1,6 +1,7 @@
-from flask import Flask, render_template, jsonify
+from flask import Flask, render_template, jsonify, request, make_response
 import random
 import os
+import json
 
 app = Flask(__name__)
 
@@ -100,42 +101,49 @@ class GachaSimulator:
         self.sr_plus_cost_cache = (cost, self.total_draws, self.card_counts)
         return self.sr_plus_cost_cache
 
+    def to_dict(self):
+        return {
+            'totalCost': self.total_cost,
+            'totalDraws': self.total_draws,
+            'cardCounts': self.card_counts,
+            'cards': [{'image': card[1]} for card in self.cards]
+        }
+
 
 simulator = GachaSimulator()
 
 @app.route('/')
 def index():
+
+    simulator_data = request.cookies.get('gacha_data')
+    if simulator_data:
+        simulator_data = json.loads(simulator_data)
+        simulator.total_cost = simulator_data['totalCost']
+        simulator.total_draws = simulator_data['totalDraws']
+        simulator.card_counts = simulator_data['cardCounts']
+        simulator.cards = [(card['type'], card['image']) for card in simulator_data['cards']]
     return render_template('index.html')
 
 @app.route('/draw_single')
 def draw_single():
     simulator.draw_single()
-    return jsonify({
-        'totalCost': simulator.total_cost,
-        'totalDraws': simulator.total_draws,
-        'cardCounts': simulator.card_counts,
-        'cards': [{'image': card[1]} for card in simulator.cards]
-    })
+    resp = make_response(jsonify(simulator.to_dict()))
+    resp.set_cookie('gacha_data', json.dumps(simulator.to_dict()))
+    return resp
 
 @app.route('/draw_eleven')
 def draw_eleven():
     simulator.draw_eleven()
-    return jsonify({
-        'totalCost': simulator.total_cost,
-        'totalDraws': simulator.total_draws,
-        'cardCounts': simulator.card_counts,
-        'cards': [{'image': card[1]} for card in simulator.cards]
-    })
+    resp = make_response(jsonify(simulator.to_dict()))
+    resp.set_cookie('gacha_data', json.dumps(simulator.to_dict()))
+    return resp
 
 @app.route('/reset')
 def reset():
     simulator.reset()
-    return jsonify({
-        'totalCost': simulator.total_cost,
-        'totalDraws': simulator.total_draws,
-        'cardCounts': simulator.card_counts,
-        'cards': []
-    })
+    resp = make_response(jsonify(simulator.to_dict()))
+    resp.set_cookie('gacha_data', json.dumps(simulator.to_dict()))
+    return resp
 
 @app.route('/calculate_sr_plus_cost')
 def calculate_sr_plus_cost():
